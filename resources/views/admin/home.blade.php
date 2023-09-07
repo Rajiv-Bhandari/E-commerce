@@ -1,14 +1,18 @@
-<x-app-layout>
-    
-</x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-</head>
-<body>
-    <h1>Admin Pannel</h1>
-</body>
+  <head>
+    @include('admin.css')
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      @include('admin.sidebar')
+      <!-- partial -->
+      @include('admin.header')
+        <!-- partial -->
+    @include('admin.body')
+    <!-- container-scroller -->
+    @include('admin.script')
+    <!-- End custom js for this page -->
+  </body>
 </html>
