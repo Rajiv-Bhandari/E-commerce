@@ -36,7 +36,11 @@
         .input_color{
             color: black;
         }
-
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #4d3d00;
+        }
     </style>
 </head>
 <body>
