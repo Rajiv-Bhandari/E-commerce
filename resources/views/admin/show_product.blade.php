@@ -83,7 +83,8 @@
                             <th>Price</th>
                             <th>Discount Price</th>
                             <th>Image</th>
-                            <!-- <th>Action</th> -->
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,9 +100,13 @@
                                 <td>
                                     <img class="img_size" src="/productimg/{{$data->image}}">
                                 </td>
-                                <!-- <td class="action-buttons">
-                                    <a onclick="return confirm('Are you sure to delete this?')" class="btn btn-danger" href="{{url('delete_product',$data->id)}}">Delete</a>
-                                </td> -->
+                                <td>
+                                    <a class="btn btn-primary" href="{{url('update_product', $data->id)}}">Edit</a>
+                                </td>
+                                <td >
+                                    <a onclick="return confirm('Are you sure to delete this?')" class="btn btn-danger" href="{{url('delete_product', $data->id)}}">Delete</a>
+                                    <!-- <a onclick="return confirm('Are you sure to delete this?')" class="btn btn-danger" href="{{url('delete_product',$data->id)}}">Delete</a> -->
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
