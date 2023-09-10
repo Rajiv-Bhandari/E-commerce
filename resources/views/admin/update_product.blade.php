@@ -99,34 +99,37 @@
             @endif
             <h1 class="main-title">Add Product</h1>
             <div class="form-container">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{url('/update_product_confirm', $product->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <label class="form-label">Title:</label>
-                    <input class="form-input" type="text" name="title" value="{{$product->title}}">
+                    <input class="form-input" type="text" name="title" value="{{$product->title}}" required>
                     
                     <label class="form-label">Description:</label>
-                    <input class="form-input" type="text" name="description" placeholder="Enter Description" value="{{$product->description}}">
+                    <input class="form-input" type="text" name="description" placeholder="Enter Description" value="{{$product->description}}" required>
                     
                     <label class="form-label">Price:</label>
-                    <input class="form-input" type="number" name="price" placeholder="Enter Price" value="{{$product->price}}">
+                    <input class="form-input" type="number" name="price" placeholder="Enter Price" value="{{$product->price}}" required>
                     
                     <label class="form-label">Discount Price:</label>
                     <input class="form-input" type="number" name="dis_price" placeholder="Enter Discount Price" value="{{$product->discount_price}}">
                     
                     <label class="form-label">Quantity:</label>
-                    <input class="form-input" type="number" min="0" name="quantity" placeholder="Enter Quantity" value="{{$product->quantity}}">
+                    <input class="form-input" type="number" min="0" name="quantity" placeholder="Enter Quantity" value="{{$product->quantity}}" required>
                     
                     <label class="form-label">Category:</label>
-                    <select class="form-select" name="category">
-                        <option value="" selected>{{$product->category}}</option>
+                    <select class="form-select" name="category" required>
+                        <option value="{{$product->category}}" selected>{{$product->category}}</option>
                         @foreach($category as $cat)
                             <option value="{{$cat->category_name}}">{{$cat->category_name}}</option>
                         @endforeach
                     </select>
                     
                     <label class="form-label">Image:</label>
-                    <img class="img_size" src="/productimg/{{$product->image}}">
-                    
+                    <img class="img_size" src="/productimg/{{$product->image}}"><br>
+
+                    <label class="form-label">Change Product Image:</label>
+                    <input type="file" name="image">
+
                     <button type="submit" class="form-submit">Update</button>
                 </form>
             </div>
