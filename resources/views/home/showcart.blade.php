@@ -23,16 +23,24 @@
       <style>
         .center{
             margin: auto;
-            width: 60%;
-            text-align: center;
+            width: 80%;
             padding: 30px;
         }
-        table,th,td{
-            border : 1px solid grey;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
         }
         .img_des{
-            height:250px;
-            width:250px;
+            max-height: 150px;
+            max-width: 150px;
         }
         .total_price{
             font-size: 20px;
@@ -44,50 +52,49 @@
       <div class="hero_area">
          <!-- header section strats -->
          @include('home.header')
-      
        <div class="center">
-            <table>
-                <tr>
-                    <th>Product Title</th>
-                    <th>Product Quantity</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                </tr>
-                <?php $totalprice=0; ?>
-                @foreach($cart as $cart)
-                <tr>
-                    <td>{{$cart->product_title}}</td>
-                    <td>{{$cart->quantity}}</td>
-                    <td>Rs. {{$cart->price}}</td>
-                    <td><img class="img_des" src="/productimg/{{$cart->image}}"></td>
-                    <td><a class="btn btn-danger" href="{{url('remove_cart',$cart->id)}}">Remove</a></td>
-                </tr>
-                <?php $totalprice = $totalprice + $cart->price;?>
-                @endforeach
-                
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product Title</th>
+                        <th>Product Quantity</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $totalprice = 0; ?>
+                    @foreach($cart as $cart)
+                    <tr>
+                        <td>{{$cart->product_title}}</td>
+                        <td>{{$cart->quantity}}</td>
+                        <td>Rs. {{$cart->price}}</td>
+                        <td><img class="img_des" src="/productimg/{{$cart->image}}" alt="Product Image"></td>
+                        <td><a class="btn btn-danger" href="{{url('remove_cart',$cart->id)}}">Remove</a></td>
+                    </tr>
+                    <?php $totalprice = $totalprice + $cart->price;?>
+                    @endforeach
+                </tbody>
             </table>
             <div>
                 <h1 class="total_price">Total Price: Rs. {{$totalprice}}</h1>
             </div>
-            
        </div>
       <!-- @include('home.footer') -->
       <!-- footer end -->
       <div class="cpy_">
          <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
-         
             Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-         
          </p>
       </div>
-      <!-- jQery -->
+      <!-- jQuery -->
       <script src="home/js/jquery-3.4.1.min.js"></script>
-      <!-- popper js -->
+      <!-- Popper.js -->
       <script src="home/js/popper.min.js"></script>
-      <!-- bootstrap js -->
+      <!-- Bootstrap.js -->
       <script src="home/js/bootstrap.js"></script>
-      <!-- custom js -->
+      <!-- Custom JavaScript -->
       <script src="home/js/custom.js"></script>
    </body>
 </html>
