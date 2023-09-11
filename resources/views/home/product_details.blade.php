@@ -118,7 +118,17 @@
                     <div class="product-quantity">
                         Available Quantity: {{$products->quantity}}
                     </div>
-                    <a class="btn btn-primary add-to-cart-btn">Add to Cart</a>
+                    <form action="{{url('add_cart',$products->id)}}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4">
+                            <input type="number" name="Quantity" value="1" min="1" style="width: 100px;">
+                            </div>
+                            <div class="col-md-4">
+                            <input type="submit" value="Add To Cart">
+                            </div>
+                        </div> 
+                    </form>
                 </div>
             </div>
         </div>
