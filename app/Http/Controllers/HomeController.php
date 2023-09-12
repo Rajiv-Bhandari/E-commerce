@@ -10,6 +10,8 @@ use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Session;
+use Stripe;
 
 class HomeController extends Controller
 {
@@ -119,5 +121,24 @@ class HomeController extends Controller
             $cart->delete();
         }
         return redirect()->back()->with('message','We Have Received Your Order');
+    }
+    public function stripe($totalprice)
+    {
+        return view('home.stripe',compact('totalprice'));
+    }
+    public function stripePost(Request $request, $totalprice)
+    {
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+    
+        Stripe\Charge::create([
+            "amount" => number_format($totalprice / 132, 2, '.', '') * 100,
+            "currency" => "usd",
+            "source" => $request->stripeToken,
+            "description" => "Thanks For Payment" 
+        ]);
+      
+        Session::flash('success', 'Payment successful!');
+              
+        return back();
     }
 }
