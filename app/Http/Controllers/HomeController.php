@@ -136,9 +136,36 @@ class HomeController extends Controller
             "source" => $request->stripeToken,
             "description" => "Thanks For Payment" 
         ]);
+        $user = Auth::user();
+        $user_id = $user->id;
+        $data = Cart::where('user_id', '=',$user_id)->get();
+        foreach($data as $data)
+        {
+            $order=  new Order;
+            $order->name = $data->name;
+            $order->email = $data->email;
+            $order->phone = $data->phone;
+            $order->address = $data->address;
+            $order->user_id = $data->user_id;
+
+            $order->product_title = $data->product_title;
+            $order->price = $data->price;
+            $order->quantity = $data->quantity;
+            $order->image = $data->image;
+            $order->product_id = $data->Product_id;
+            $order->image = $data->image;
+            $order->payment_status = 'paid';
+            $order->delivery_status = 'processing';
+            $order->save();
+
+            $cart_id = $data->id;
+            $cart = Cart::find($cart_id);
+            $cart->delete();
+        }
       
         Session::flash('success', 'Payment successful!');
               
-        return back();
+        // return back();
+        return redirect('redirect')->with('message','Payment Successful');
     }
 }
