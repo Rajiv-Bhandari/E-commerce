@@ -5,7 +5,7 @@
     <style>
         .table_deg {
             border-collapse: collapse;
-            width: 90%;
+            width: 100%;
             margin: auto;
             padding-top: 50px;
         }
@@ -59,6 +59,7 @@
                     <th>Delivery Status</th>
                     <th>Image</th>
                     <th>Delivered</th>
+                    <th>Print PDF</th>
                 </tr>
                 @foreach($order as $order)
                     <tr>
@@ -71,9 +72,9 @@
                         <td>{{$order->price}}</td>
                         <td>{{$order->payment_status}}</td>
                         <td>{{$order->delivery_status}}</td>
-                        <td>
+                        <!-- <td>
                             <img src="/productimg/{{$order->image}}" alt="Product Image">
-                        </td>
+                        </td> -->
                         @if($order->delivery_status == "processing")
                         <td>
                             <a href="{{url('delivered', $order->id)}}" onclick="return confirm('Are you sure this product is delivered')" class="btn btn-primary">Delivered</a>
@@ -84,6 +85,9 @@
                             <p>Delivered</p>
                         </td>
                         @endif
+                        <td>
+                            <a class="btn btn-secondary" href="{{url('print_pdf', $order->id)}}" >Print PDF</a>
+                        </td>
                     </tr>
                 @endforeach
             </table>
