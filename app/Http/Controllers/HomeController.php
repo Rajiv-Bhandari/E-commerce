@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -88,5 +89,35 @@ class HomeController extends Controller
         $cart = Cart::find($id);
         $cart->delete();
         return redirect()->back();
+    }
+    public function cash_order()
+    {
+        $user = Auth::user();
+        $user_id = $user->id;
+        $data = Cart::where('user_id', '=',$user_id)->get();
+        foreach($data as $data)
+        {
+            $order=  new Order;
+            $order->name = $data->name;
+            $order->email = $data->email;
+            $order->phone = $data->phone;
+            $order->address = $data->address;
+            $order->user_id = $data->user_id;
+
+            $order->product_title = $data->product_title;
+            $order->price = $data->price;
+            $order->quantity = $data->quantity;
+            $order->image = $data->image;
+            $order->product_id = $data->Product_id;
+            $order->image = $data->image;
+            $order->payment_status = 'cash on delivery';
+            $order->delivery_status = 'processing';
+            $order->save();
+
+            $cart_id = $data->id;
+            $cart = Cart::find($cart_id);
+            $cart->delete();
+        }
+        return redirect()->back()->with('message','We Have Received Your Order');
     }
 }

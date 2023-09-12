@@ -10,8 +10,8 @@
       <meta name="keywords" content="" />
       <meta name="description" content="" />
       <meta name="author" content="" />
-      <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <link rel="shortcut icon" href="images/Our_logo.png" type="">
+      <title>Infinite Innovation</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -52,6 +52,12 @@
       <div class="hero_area">
          <!-- header section strats -->
          @include('home.header')
+         @if(session()->has('message'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    {{session()->get('message')}}
+                </div>
+            @endif
        <div class="center">
             <table class="table table-bordered">
                 <thead>
@@ -79,6 +85,11 @@
             </table>
             <div>
                 <h1 class="total_price">Total Price: Rs. {{$totalprice}}</h1>
+            </div>
+            <div>
+                <h1 style="font-size:25px; padding-bottom:15px;">Proceed To Order: </h1>
+                <a href="{{url('cash_order')}}" class="btn btn-primary">Cash On Delivery</a>
+                <a href="" class="btn btn-primary">Pay Online</a>
             </div>
        </div>
       <!-- @include('home.footer') -->

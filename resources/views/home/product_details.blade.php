@@ -11,8 +11,8 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="images/favicon.png" type="">
-    <title>Famms - Fashion HTML Template</title>
+    <link rel="shortcut icon" href="images/Our_logo.png" type="">
+    <title>Infinite Innovation</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
     <!-- Font Awesome style -->
