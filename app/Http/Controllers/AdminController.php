@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
 use PDF;
+use Notification;
+use App\Notifications\SendEmailNotification;
 
 class AdminController extends Controller
 {
@@ -110,5 +112,20 @@ class AdminController extends Controller
         $order = Order::find($id);
         $pdf = PDF::loadView('admin.pdf',compact('order'));
         return $pdf->download('order_details.pdf');
+    }
+    public function send_mail($id)
+    {
+        $order = Order::find($id);
+        return view('admin.email_info', compact('order'));
+    }
+    public function send_user_email(Request $request, $id)
+    {
+        $order= Order::find($id);
+        $details = [
+            'title'=> $request->title,
+            'body'=> $request->body,
+        ];
+        Notification::send($order, new SendEmailNotification($details));
+        return redirect()->back()->with('message','Mail Sent Successfully');
     }
 }

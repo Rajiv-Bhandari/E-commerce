@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('admin.css')
-    <style>
+    <!-- <style>
         .table_deg {
             border-collapse: collapse;
             width: 100%;
@@ -34,7 +34,7 @@
         }
 
         /* Add additional styling as needed */
-    </style>
+    </style> -->
 </head>
 <body>
 <div class="container-scroller">
@@ -57,9 +57,10 @@
                     <th>Price</th>
                     <th>Payment Status</th>
                     <th>Delivery Status</th>
-                    <th>Image</th>
+                    <!-- <th>Image</th> -->
                     <th>Delivered</th>
                     <th>Print PDF</th>
+                    <th>Send Mail</th>
                 </tr>
                 @foreach($order as $order)
                     <tr>
@@ -87,6 +88,9 @@
                         @endif
                         <td>
                             <a class="btn btn-secondary" href="{{url('print_pdf', $order->id)}}" >Print PDF</a>
+                        </td>
+                        <td>
+                            <a href="{{url('send_mail', $order->id)}}" class="btn btn-info">Send Mail</a>
                         </td>
                     </tr>
                 @endforeach
