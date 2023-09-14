@@ -101,7 +101,7 @@ class HomeController extends Controller
     {
         $cart = Cart::find($id);
         $cart->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message','Removed Product From Cart');
     }
     public function cash_order()
     {
@@ -178,5 +178,25 @@ class HomeController extends Controller
               
         // return back();
         return redirect('redirect')->with('message','Payment Successful');
+    }
+    public function show_order()
+    {
+        if(Auth()->id())
+        {
+            $id = Auth::user()->id;
+            $order = Order::where('user_id', '=', $id)->get();
+            return view('home.order',compact('order'));
+        }
+        else{
+            return redirect('login');
+        }
+        
+    }
+    public function cancel_order($id)
+    {
+        $order = Order::find($id);
+        $order->delivery_status = 'Cancelled';
+        $order->save();
+        return redirect()->back()->with('message','Order Cancelled Successful');
     }
 }

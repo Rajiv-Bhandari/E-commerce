@@ -55,3 +55,5 @@ route::get('/cash_order', [HomeController::class, 'cash_order']);
 route::get('/stripe/{totalprice}', [HomeController::class, 'stripe']);
 
 Route::post('stripe/{totalprice}', [HomeController::class, 'stripePost'])->name('stripe.post');
+route::get('/show_order', [HomeController::class, 'show_order']); 
+route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);
