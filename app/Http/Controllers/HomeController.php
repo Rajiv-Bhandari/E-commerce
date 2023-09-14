@@ -27,7 +27,18 @@ class HomeController extends Controller
         $product = Product::paginate(9);
         if($usertype == '1')
         {
-            return view('admin.home',compact('product'));
+            $total_product = Product::all()->count();
+            $total_order = Order::all()->count();
+            $total_user = User::all()->count();
+            $order = Order::all();
+            $total_revenue = 0;
+            foreach($order as $order)
+            {
+                $total_revenue = $total_revenue + $order->price;
+            }
+            $order_delivered = Order::where('delivery_status','=','Delivered')->get()->count();
+            $order_processing = Order::where('delivery_status','=','processing')->get()->count();
+            return view('admin.home',compact('product','total_product','total_order','total_user','total_revenue','order_delivered','order_processing'));
         }
         else 
         {

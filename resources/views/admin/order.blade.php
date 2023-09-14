@@ -2,39 +2,6 @@
 <html lang="en">
 <head>
     @include('admin.css')
-    <!-- <style>
-        .table_deg {
-            border-collapse: collapse;
-            width: 100%;
-            margin: auto;
-            padding-top: 50px;
-        }
-
-        .table_deg, .table_deg th, .table_deg td {
-            border: 1px solid #ddd;
-        }
-
-        .th_deg {
-            background-color: skyblue;
-            color: white;
-        }
-
-        .table_deg th, .table_deg td {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .table_deg img {
-            max-width: 100px;
-            max-height: 100px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        /* Add additional styling as needed */
-    </style> -->
     <style>
         .table_deg{
             border: 2px solid white;
@@ -45,6 +12,10 @@
         }
         .th_deg{
             background-color: skyblue;
+        }
+        .table_deg img {
+            max-width: 100px;
+            max-height: 100px;
         }
     </style>
 </head>
