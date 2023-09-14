@@ -45,6 +45,7 @@ route::get('/delivered/{id}', [AdminController::class, 'delivered']);
 route::get('/print_pdf/{id}', [AdminController::class, 'print_pdf']);
 route::get('/send_mail/{id}', [AdminController::class, 'send_mail']);
 route::post('/send_user_email/{id}', [AdminController::class, 'send_user_email']);
+route::get('/search', [AdminController::class, 'search']);
 
 route::get('/product_details/{id}', [HomeController::class, 'product_details']);
 route::post('/add_cart/{id}', [HomeController::class, 'add_cart']);

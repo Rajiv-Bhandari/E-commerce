@@ -128,4 +128,18 @@ class AdminController extends Controller
         Notification::send($order, new SendEmailNotification($details));
         return redirect()->back()->with('message','Mail Sent Successfully');
     }
+    public function search(Request $request)
+    {
+        $searchtext = $request->search;
+        $order = Order::where('name','LIKE',"%$searchtext%")->
+                        orWhere('phone','LIKE',"%$searchtext%")->
+                        orWhere('email','LIKE',"%$searchtext%")->
+                        orWhere('product_title','LIKE',"%$searchtext%")->
+                        orWhere('delivery_status','LIKE',"%$searchtext%")->
+                        orWhere('address','LIKE',"%$searchtext%")->
+                        orWhere('price','LIKE',"%$searchtext%")->
+                        orWhere('payment_status','LIKE',"%$searchtext%")->get();
+        
+        return view('admin.order',compact('order'));
+    }
 }
