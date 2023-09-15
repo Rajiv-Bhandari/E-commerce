@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Session;
@@ -20,7 +21,9 @@ class HomeController extends Controller
     {
         $product = Product::paginate(9);
         // $product = Product::all();
-        return view('home.userpage',compact('product'));
+        $comment = Comment::orderby('id','desc')->get();
+        $reply = Reply::all();
+        return view('home.userpage',compact('product','comment','reply'));
     }
     public function redirect()
     {
@@ -42,9 +45,10 @@ class HomeController extends Controller
             return view('admin.home',compact('product','total_product','total_order','total_user','total_revenue','order_delivered','order_processing'));
         }
         else 
-        {
-            $comment = Comment::all();
-            return view('home.userpage',compact('product','comment'));
+        { 
+            $comment = Comment::orderby('id','desc')->get();
+            $reply = Reply::all();
+            return view('home.userpage',compact('product','comment','reply'));
         }
     }
     public function product_details($id)
@@ -211,6 +215,22 @@ class HomeController extends Controller
             $comment->comment = $request->comment;
             $comment->save();
             return redirect()->back()->with('message','Comment Posted Successful');
+        }
+        else{
+            return redirect('login');
+        }
+    }
+    public function add_reply(Request $request)
+    {
+        if(Auth()->id())
+        {
+            $reply = new Reply;
+            $reply->name = Auth::user()->name;
+            $reply->user_id = Auth::user()->id;
+            $reply->comment_id = $request->commentId;
+            $reply->reply = $request->reply;
+            $reply->save();
+            return redirect()->back();
         }
         else{
             return redirect('login');
