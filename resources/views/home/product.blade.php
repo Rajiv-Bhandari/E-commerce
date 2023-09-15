@@ -3,7 +3,14 @@
             <div class="heading_container heading_center">
                <h2>
                   Our <span>products</span>
-               </h2>
+               </h2><br>
+               <div>
+                  <form action="{{url('product_search')}}" method="GET">
+                     @csrf
+                     <input style="width:500px;" type="text" name="search" placeholder="Search Product" value="{{ old('search') }}">
+                     <input type="submit" value="Search">
+                  </form>
+               </div>
             </div>
             <div class="row">
                @foreach($product as $products)
@@ -62,11 +69,7 @@
                {!! $product->withQueryString()->links('pagination::bootstrap-4') !!}
                </span>
             </div>
-            <!-- <div class="btn-box">
-               <a href="">
-               View All products
-               </a>
-            </div> -->
+            
          </div>
          
 
