@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Comment;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Session;
@@ -42,7 +43,8 @@ class HomeController extends Controller
         }
         else 
         {
-            return view('home.userpage',compact('product'));
+            $comment = Comment::all();
+            return view('home.userpage',compact('product','comment'));
         }
     }
     public function product_details($id)
@@ -198,5 +200,20 @@ class HomeController extends Controller
         $order->delivery_status = 'Cancelled';
         $order->save();
         return redirect()->back()->with('message','Order Cancelled Successful');
+    }
+    public function add_comment(Request $request)
+    {
+        if(Auth()->id())
+        {
+            $comment = new Comment;
+            $comment->name = Auth::user()->name;
+            $comment->user_id = Auth::user()->id;
+            $comment->comment = $request->comment;
+            $comment->save();
+            return redirect()->back()->with('message','Comment Posted Successful');
+        }
+        else{
+            return redirect('login');
+        }
     }
 }
