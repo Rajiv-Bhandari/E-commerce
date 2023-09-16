@@ -2,39 +2,35 @@
 <html>
    <head>
       {{-- <base href="/public"> --}}
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="shortcut icon" href="images/Our_logo.png" type="">
-    <title>Infinite Innovation</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="{{asset('home/css/bootstrap.css')}}" />
-    <!-- Font Awesome style -->
-    <link href="{{asset('home/css/font-awesome.min.css')}}" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="{{asset('home/css/style.css')}}" rel="stylesheet" />
-    <!-- Responsive style -->
-    <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet" />
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Site Metas -->
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link rel="shortcut icon" href="images/Our_logo.png" type="">
+        <title>Infinite Innovation</title>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="{{asset('home/css/bootstrap.css')}}" />
+        <!-- Font Awesome style -->
+        <link href="{{asset('home/css/font-awesome.min.css')}}" rel="stylesheet" />
+        <!-- Custom styles for this template -->
+        <link href="{{asset('home/css/style.css')}}" rel="stylesheet" />
+        <!-- Responsive style -->
+        <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet" />
    </head>
    <body>
     <div class="hero_area">
         <!-- header section strats -->
         @include('home.header')
-        <!-- end header section -->
-        @include('home.slider')
-    </div>
-    @include('home.why')
-
-    @include('home.new_arival')
+   
+ 
 
     <!-- product section -->
-    @include('home.product')
+    @include('home.product_view')
     <!-- end product section -->
 
     <!-- comment and reply section starts -->
@@ -80,16 +76,7 @@
         
     </div>
 
-    <!-- comment and reply section ends -->
 
-    <!-- subscribe section -->
-    @include('home.subscribe')
-    <!-- end subscribe section -->
-    <!-- client section -->
-    @include('home.client')
-    <!-- end client section -->
-    <!-- footer start -->
-    @include('home.footer')
     <!-- footer end -->
     <div class="cpy_">
         <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>

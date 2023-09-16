@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
+      {{-- <base href="/public"> --}}
       <!-- Basic -->
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,15 +13,14 @@
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/Our_logo.png" type="">
       <title>Infinite Innovation</title>
-      <!-- Bootstrap Core CSS -->
-      <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
-      <!-- Font Awesome CSS -->
-      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
-      <!-- Custom Styles -->
-      <link href="home/css/style.css" rel="stylesheet" />
-      <!-- Responsive Styles -->
-      <link href="home/css/responsive.css" rel="stylesheet" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <!-- Bootstrap core CSS -->
+      <link rel="stylesheet" type="text/css" href="{{asset('home/css/bootstrap.css')}}" />
+      <!-- Font Awesome style -->
+      <link href="{{asset('home/css/font-awesome.min.css')}}" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="{{asset('home/css/style.css')}}" rel="stylesheet" />
+      <!-- Responsive style -->
+      <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet" />
 
       <!-- Inline CSS for Table Styling -->
       <style>

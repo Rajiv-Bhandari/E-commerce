@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <!-- Basic -->
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <!-- Mobile Metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <!-- Site Metas -->
-      <meta name="keywords" content="" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-      <link rel="shortcut icon" href="images/Our_logo.png" type="">
-      <title>Infinite Innovation</title>
-      <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
-      <!-- font awesome style -->
-      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
-      <!-- Custom styles for this template -->
-      <link href="home/css/style.css" rel="stylesheet" />
-      <!-- responsive style -->
-      <link href="home/css/responsive.css" rel="stylesheet" />
+    {{-- <base href="/public"> --}}
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Site Metas -->
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link rel="shortcut icon" href="images/Our_logo.png" type="">
+        <title>Infinite Innovation</title>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="{{asset('home/css/bootstrap.css')}}" />
+        <!-- Font Awesome style -->
+        <link href="{{asset('home/css/font-awesome.min.css')}}" rel="stylesheet" />
+        <!-- Custom styles for this template -->
+        <link href="{{asset('home/css/style.css')}}" rel="stylesheet" />
+        <!-- Responsive style -->
+        <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet" />
       <style>
         .center{
             margin: auto;
@@ -53,11 +54,11 @@
          <!-- header section strats -->
          @include('home.header')
          @if(session()->has('message'))
-                <div class="alert alert-success">
+                <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     {{session()->get('message')}}
                 </div>
-            @endif
+        @endif
        <div class="center">
             <table class="table table-bordered">
                 <thead>

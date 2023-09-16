@@ -9,13 +9,20 @@ use App\Models\Order;
 use PDF;
 use Notification;
 use App\Notifications\SendEmailNotification;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function view_category()
     {
-        $data = Category::all();
-        return view('admin.category',compact('data'));
+        if(Auth::id())
+        {
+            $data = Category::all();
+            return view('admin.category',compact('data'));
+
+        }else{
+            return redirect('login');
+        }
     }
     public function add_category(Request $request)
     {

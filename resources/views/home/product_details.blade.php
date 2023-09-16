@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="/public">
+    {{-- <base href="/public"> --}}
     <!-- Basic -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,13 +14,13 @@
     <link rel="shortcut icon" href="images/Our_logo.png" type="">
     <title>Infinite Innovation</title>
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/bootstrap.css')}}" />
     <!-- Font Awesome style -->
-    <link href="home/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="{{asset('home/css/font-awesome.min.css')}}" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="home/css/style.css" rel="stylesheet" />
+    <link href="{{asset('home/css/style.css')}}" rel="stylesheet" />
     <!-- Responsive style -->
-    <link href="home/css/responsive.css" rel="stylesheet" />
+    <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet" />
     <!-- Add your custom CSS styles here -->
     <style>
         /* Styles for the product details section */
