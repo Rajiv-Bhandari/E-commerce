@@ -21,6 +21,8 @@
       <link href="{{asset('home/css/style.css')}}" rel="stylesheet" />
       <!-- Responsive style -->
       <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 
       <!-- Inline CSS for Table Styling -->
       <style>

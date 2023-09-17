@@ -14,6 +14,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Session;
 use Stripe;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -78,7 +79,8 @@ class HomeController extends Controller
                     $cart->price = $product->price * $cart->quantity;
                 }
                 $cart->save();
-                return redirect()->back()->with('message','Added To Cart');
+                Alert::success('Product Added Successfully','We have added product to the cart');
+                return redirect()->back();
             }
             else
             {
@@ -101,8 +103,8 @@ class HomeController extends Controller
                 $cart->Product_id = $product->id;
                 $cart->quantity = $request->Quantity;
                 $cart->save();
-                
-                return redirect()->back()->with('message','Added To Cart');
+                Alert::success('Product Added Successfully','We have added product to the cart');
+                return redirect()->back();
             }
             
         }
@@ -128,7 +130,8 @@ class HomeController extends Controller
     {
         $cart = Cart::find($id);
         $cart->delete();
-        return redirect()->back()->with('message','Removed Product From Cart');
+        Alert::warning('Removed From Cart Successfully','You have removed a product from cart');
+        return redirect()->back();
     }
     public function cash_order()
     {
