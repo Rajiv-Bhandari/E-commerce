@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GoogleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,8 @@ Route::middleware([
     })->name('dashboard');
 });
 
-route::get('/redirect', [HomeController::class, 'redirect'])->middleware('auth', 'verified');
+route::get('/redirect', [HomeController::class, 'redirect']);
+// ->middleware('auth', 'verified') i dont want email verification so
 
 route::get('/view_category', [AdminController::class, 'view_category']);
 route::post('/add_category', [AdminController::class, 'add_category']);
@@ -62,3 +64,7 @@ route::post('/add_reply', [HomeController::class, 'add_reply']);
 route::get('/product_search', [HomeController::class, 'product_search']); 
 route::get('/products', [HomeController::class, 'products']);
 route::get('/search_product', [HomeController::class, 'search_product']); 
+
+
+route::get('auth/google', [GoogleController::class, 'googlepage']);
+route::get('auth/google/callback', [GoogleController::class, 'googlecallback']);

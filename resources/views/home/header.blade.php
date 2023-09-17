@@ -10,13 +10,13 @@
                         <li class="nav-item active">
                            <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
-                       <li class="nav-item dropdown">
+                       {{-- <li class="nav-item dropdown">
                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Pages <span class="caret"></span></a>
                            <ul class="dropdown-menu">
                               <li><a href="about.html">About</a></li>
                               <li><a href="testimonial.html">Testimonial</a></li>
                            </ul>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                            <a class="nav-link" href="{{url('products')}}">Products</a>
                         </li>
