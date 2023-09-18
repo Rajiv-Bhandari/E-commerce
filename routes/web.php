@@ -68,3 +68,4 @@ route::get('/search_product', [HomeController::class, 'search_product']);
 
 route::get('auth/google', [GoogleController::class, 'googlepage']);
 route::get('auth/google/callback', [GoogleController::class, 'googlecallback']);
+route::get('/contact', [HomeController::class, 'contact']);

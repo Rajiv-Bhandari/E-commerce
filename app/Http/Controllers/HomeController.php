@@ -285,4 +285,8 @@ class HomeController extends Controller
         ->orWhere('category','LIKE',"%$search_text%")->paginate(9);
         return view('home.all_product', compact('product','comment','reply'));
     }
+    public function contact()
+    {
+        return view('home.contactpage');
+    }
 }
