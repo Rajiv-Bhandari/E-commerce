@@ -24,7 +24,8 @@ class HomeController extends Controller
         // $product = Product::all();
         $comment = Comment::orderby('id','desc')->get();
         $reply = Reply::all();
-        return view('home.userpage',compact('product','comment','reply'));
+        $cartItemCount = $this->getCartItemCount();
+        return view('home.userpage',compact('product','comment','reply','cartItemCount'));
     }
     public function redirect()
     {
@@ -46,16 +47,18 @@ class HomeController extends Controller
             return view('admin.home',compact('product','total_product','total_order','total_user','total_revenue','order_delivered','order_processing'));
         }
         else 
-        { 
+        {
+            $cartItemCount = $this->getCartItemCount();
             $comment = Comment::orderby('id','desc')->get();
             $reply = Reply::all();
-            return view('home.userpage',compact('product','comment','reply'));
+            return view('home.userpage',compact('product','comment','reply','cartItemCount'));
         }
     }
     public function product_details($id)
     {
         $products = Product::find($id);
-        return view('home.product_details',compact('products'));
+        $cartItemCount = $this->getCartItemCount();
+        return view('home.product_details',compact('products','cartItemCount'));
     }
     public function add_cart(Request $request, $id)
     {
@@ -117,9 +120,10 @@ class HomeController extends Controller
     {
         if(Auth()->id())
         {
+            $cartItemCount = $this->getCartItemCount();
             $id = Auth::user()->id;
             $cart = Cart::where('user_id', '=', $id)->get();
-            return view('home.showcart',compact('cart'));
+            return view('home.showcart',compact('cart','cartItemCount'));
         }
         else{
             return redirect('login');
@@ -138,7 +142,13 @@ class HomeController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
         $data = Cart::where('user_id', '=',$user_id)->get();
-        foreach($data as $data)
+        if($data->count() == 0)
+        {
+            Alert::warning('Please add items in Cart!','You need to add product in cart in order to checkout');
+            return redirect()->back();
+        }
+        else{
+            foreach($data as $data)
         {
             $order=  new Order;
             $order->name = $data->name;
@@ -161,11 +171,23 @@ class HomeController extends Controller
             $cart = Cart::find($cart_id);
             $cart->delete();
         }
-        return redirect()->back()->with('message','We Have Received Your Order');
+        Alert::success('We Have Received Your Order','We will contact you shortly');
+        return redirect()->back();
+        }
+        
     }
     public function stripe($totalprice)
     {
-        return view('home.stripe',compact('totalprice'));
+        $cartItemCount = $this->getCartItemCount();
+        $user = Auth::user();
+        $user_id = $user->id;
+        $data = Cart::where('user_id', '=',$user_id)->get();
+        if($data->count() == 0)
+        {
+            Alert::warning('Please add items in Cart!','You need to add product in cart in order to checkout');
+            return redirect()->back();
+        }
+        return view('home.stripe',compact('totalprice','cartItemCount'));
     }
     public function stripePost(Request $request, $totalprice)
     {
@@ -180,6 +202,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
         $data = Cart::where('user_id', '=',$user_id)->get();
+        
         foreach($data as $data)
         {
             $order=  new Order;
@@ -215,7 +238,8 @@ class HomeController extends Controller
         {
             $id = Auth::user()->id;
             $order = Order::where('user_id', '=', $id)->get();
-            return view('home.order',compact('order'));
+            $cartItemCount = $this->getCartItemCount();
+            return view('home.order',compact('order','cartItemCount'));
         }
         else{
             return redirect('login');
@@ -262,31 +286,46 @@ class HomeController extends Controller
     }
     public function product_search(Request $request)
     {
+        $cartItemCount = $this->getCartItemCount();
         $comment = Comment::orderby('id','desc')->get();
         $reply = Reply::all();
         $search_text = $request->search;
         $product = Product::where('title','LIKE',"%$search_text%")
         ->orWhere('category','LIKE',"%$search_text%")->paginate(9);
-        return view('home.userpage', compact('product','comment','reply'));
+        return view('home.userpage', compact('product','comment','reply','cartItemCount'));
     }
     public function products()
     {
+        $cartItemCount = $this->getCartItemCount();
         $product = Product::paginate(9);
         $comment = Comment::orderby('id','desc')->get();
         $reply = Reply::all();
-        return view('home.all_product',compact('product','comment','reply'));
+        return view('home.all_product',compact('product','comment','reply','cartItemCount'));
     }
     public function search_product(Request $request)
     {
+        $cartItemCount = $this->getCartItemCount();
         $comment = Comment::orderby('id','desc')->get();
         $reply = Reply::all();
         $search_text = $request->search;
         $product = Product::where('title','LIKE',"%$search_text%")
         ->orWhere('category','LIKE',"%$search_text%")->paginate(9);
-        return view('home.all_product', compact('product','comment','reply'));
+        return view('home.all_product', compact('product','comment','reply','cartItemCount'));
     }
     public function contact()
     {
-        return view('home.contactpage');
+        $cartItemCount = $this->getCartItemCount();
+        return view('home.contactpage',compact('cartItemCount'));
+    }
+    // doing this so that dont have to repeat code everytime
+    public function getCartItemCount()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cartItems = Cart::where('user_id', $user->id)->get();
+            return $cartItems->count();
+        } else {
+            return 0;
+        }
     }
 }
