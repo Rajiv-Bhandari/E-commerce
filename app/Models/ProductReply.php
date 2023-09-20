@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductReply extends Model
 {
     use HasFactory;
 
-    // Product.php
-    public function comments()
+    // ProductReply.php
+    public function user()
     {
-        return $this->hasMany(ProductComment::class);
+        return $this->belongsTo(User::class);
     }
 
 }

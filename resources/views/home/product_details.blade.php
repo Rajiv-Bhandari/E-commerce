@@ -134,6 +134,56 @@
         </div>
     </div>
 </div>
+    <!-- comment and reply section starts -->
+    <div style="text-align:center; padding-bottom:30px;">
+        <h1 style="font-size:30px; text-align:center; padding-bottom:20px;">Comments</h1>
+        
+        <form action="{{ route('product-comment.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $products->id }}">
+            <textarea style="height:150px; width:600px;" placeholder="Express Your Thought!" name="comment"></textarea><br>
+            <input type="submit" name="Comment" value="Comment">
+        </form>
+    </div>
+    <div style="padding-left:20%;">
+        <h3 style="font-size:30px; padding-bottom:20px;">All Comments</h3>
+        @foreach ($products->comments as $comment)
+        <div>
+            <b>{{$comment->name}}</b>
+            <p>{{$comment->comment}}</p>
+            <div style="display:none;" class="replyDiv">
+            <form class="reply-form" action="{{ route('product-reply.store') }}" method="POST">
+            @csrf
+
+                <input type="hidden" name="product_comment_id" id="product_comment_id" value="{{ $comment->id }}">
+               <textarea style="height:80px; width:500px;" placeholder="Write something here" name="reply"></textarea><br>
+               <!-- <a href="javascript::void(0);" class="btn btn-primary">Reply</a> -->
+               <!-- <input type="submit" value="Reply" class="btn btn-primary"> -->
+               <button type="submit" class="btn btn-warning">Reply</button>
+               <a href="javascript::void(0);" class="btn btn-danger" onClick="reply_close(this)">Close</a>
+            </form>
+            
+        </div><br>
+            <a style="color:blue;" href="javascript::void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}"><b>Reply</b></a>
+            @foreach ($comment->replies as $reply)
+            @if($reply->product_comment_id==$comment->id)
+            <div style="padding-left:3%; padding-bottom:10px;">
+               <b>{{$reply->user->name }}</b>
+               <p>{{$reply->reply}}</p>
+               <!-- <a style="color:blue;" href="javascript::void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}"><b>Reply</b></a> -->
+               <a style="color: blue; cursor: pointer;" class="reply-link" data-commentid="{{ $comment->id }}" onclick="reply(this)"><b>Reply</b></a>
+
+
+            </div>
+            @endif
+            @endforeach
+            
+        </div><br>
+        @endforeach
+        
+        
+    </div>
+
 <!-- Footer section -->
 @include('home.footer')
 <!-- End footer section -->
@@ -143,6 +193,36 @@
         Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
     </p>
 </div>
+
+<script type="text/javascript">
+
+// function reply(caller) {
+//    document.getElementById('product_comment_id').value=$(caller).attr('data-Commentid');
+//    $('.replyDiv').insertAfter($(caller));
+//    $('.replyDiv').show();
+// }
+// function reply_close(caller) {
+//    $('.replyDiv').hide();
+// }
+// </script>
+//   <script>
+//   document.addEventListener("DOMContentLoaded", function(event) { 
+//       var scrollpos = localStorage.getItem('scrollpos');
+//       if (scrollpos) window.scrollTo(0, scrollpos);
+//   });
+
+//   window.onbeforeunload = function(e) {
+//       localStorage.setItem('scrollpos', window.scrollY);
+//   };
+$(document).on('click', '.reply-link', function(e) {
+    e.preventDefault();
+    var commentId = $(this).data('commentid');
+    $('#product_comment_id').val(commentId);
+    $('.replyDiv').insertAfter($(this));
+    $('.replyDiv').show();
+});
+
+</script>
 <!-- jQuery -->
 <script src="home/js/jquery-3.4.1.min.js"></script>
 <!-- Popper.js -->
@@ -151,5 +231,8 @@
 <script src="home/js/bootstrap.js"></script>
 <!-- Custom JavaScript -->
 <script src="home/js/custom.js"></script>
+
+
+
 </body>
 </html>

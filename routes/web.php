@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\ProductCommentController;
+use App\Http\Controllers\ProductReplyController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,3 +72,13 @@ route::get('/search_product', [HomeController::class, 'search_product']);
 route::get('auth/google', [GoogleController::class, 'googlepage']);
 route::get('auth/google/callback', [GoogleController::class, 'googlecallback']);
 route::get('/contact', [HomeController::class, 'contact']);
+
+// Routes for Product Comments
+
+Route::post('/product-comment/store', [ProductCommentController::class, 'store'])->name('product-comment.store');
+Route::post('/product-reply', [ProductReplyController::class, 'store'])->name('product-reply.store');
+
+
+
+
+

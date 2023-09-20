@@ -65,7 +65,7 @@
         @include('home.header')
         <div class="contact-details">
             <p>
-                Infinite Innovation is not a registered company but will be registered in the future. It was created by Rajiv Bhandari, a 20-year-old student.
+                Infinite Innovation is not a registered company but will be registered in the future. This projet is  created by Rajiv Bhandari, a 20-year-old student.
                 <br>
                 You can contact me through the social media profiles:
                 <br>

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class GoogleController extends Controller
 {
@@ -34,13 +35,13 @@ class GoogleController extends Controller
             }
 
             else
-
+            $randomPassword = Str::random(12);
             {
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id'=> $user->id,
-                    'password' => Hash::make('12345678'),
+                    'password' => Hash::make($randomPassword),
                 ]);
       
                 Auth::login($newUser);
